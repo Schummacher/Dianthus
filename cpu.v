@@ -37,15 +37,15 @@ module cpu(
 		if(rst_n)
 		begin
 			case (instrution_bus[0:3])
-				4'hF: select = 16'b0000000000000001;
-				4'hE: select = 16'b0000000000000010;
-				4'hD: select = 16'b0000000000000100;
-				4'hC: select = 16'b0000000000001000;
-				4'hB: select = 16'b0000000000010000;
-				4'hA: select = 16'b0000000000100000;
-				4'h9: select = 16'b0000000001000000;
-				4'h8: select = 16'b0000000010000000;
-				4'h7: select = 16'b0000000100000000;
+				4'hF: select = 16'b0000000000000001;	//CLI
+				4'hE: select = 16'b0000000000000010;	//SBI
+				4'hD: select = 16'b0000000000000100;	//PJMP
+				4'hC: select = 16'b0000000000001000;	//JMP
+				4'hB: select = 16'b0000000000010000;	//XOR
+				4'hA: select = 16'b0000000000100000;	//OR
+				4'h9: select = 16'b0000000001000000;	//AND
+				4'h8: select = 16'b0000000010000000;	//POP
+				4'h7: select = 16'b0000000100000000;	//PUSH
 				4'h6: select = 16'b0000001000000000;    //OUT
 				4'h5: select = 16'b0000010000000000;	//IN
 				4'h4: select = 16'b0000100000000000;	//LDI
@@ -121,6 +121,9 @@ module cpu(
                     ram_data_bus_out = C;
                     ram_EN = 1;
                 end
+				16'b0000000001000000: D = D & C;
+				16'b0000000000100000: D = D | C;
+				16'b0000000000010000: D = D ^ C;
 				default:
 				begin
 					A = A;
@@ -143,9 +146,25 @@ module cpu(
 			endcase
 		end
 		else
-        begin
-            ram_EN = 0;
-        end
+		begin
+			ram_EN = 0;
+			A = 0;
+			B = 0;
+			C = 0;
+			D = 0;
+			SL = 0;
+			SH = 0;
+			PL = 0;
+			PH = 0;
+			R0 = 0;
+			R1 = 0;
+			R2 = 0;
+			R3 = 0;
+			R4 = 0;
+			R5 = 0;
+			R6 = 0;
+			R7 = 0;
+		end
 	end
 
 endmodule //
