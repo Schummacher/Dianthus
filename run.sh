@@ -2,6 +2,10 @@
 
 design=
 vcs_do=
+device=
+top=
+tesbench=
+interface=
 
 while [ $# != 0 ]
 do
@@ -38,10 +42,16 @@ fi
 
 if [ ${design} = "ram" ] 
 then
-	files='ram_tb.sv ram.v'
+	top='ram_t.sv'
+	interface='ram_if.sv ctrl_if.sv'
+	testbench='ram_tb.sv'
+	device='ram.v'
+	# files='ram_t.sv ram_if.sv ctrl_if.sv ram_tb.sv ram.v'
 elif [ ${design} = "cpu" ] 
 then
-	files='cpu_tb.sv cpu.v lfsr.v'
+	top='cpu_tb.sv'
+	device='cpu.v lfsr.v'
+	# files='cpu_tb.sv cpu.v lfsr.v'
 elif [ ${design} = "top" ] 
 then
 	files='top_tb.sv top.v cpu.v ram.v'
@@ -53,8 +63,10 @@ else
 	exit
 fi
 
-vcs $files +v2k -full64 -debug_all -o aaa > compile.log
+files="$top $interface $testbench $device"
+vcs $files +v2k -sverilog -full64 -debug_all -o aaa > compile.log
 cat compile.log | grep Warning
+cat compile.log | grep Error
 
 x=yes
 while [[ $x != y && $x != n && $x != yes && $x != no ]]
