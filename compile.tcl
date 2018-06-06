@@ -1,3 +1,6 @@
+#!/bin/tclsh
+#script of DC
+
 set target_library {typical.db}
 set link_library {* typical.db}
 set symbol_library {smic18.sdb}
