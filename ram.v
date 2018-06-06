@@ -1,25 +1,25 @@
-module ram(ram_if.DUT rif, ctrl_if.DUT cif);
+module ram(data_out, data_in, address, RW, EN, rst_n, clk);
 
-// output reg [3:0]rif.data_out;
-// input [3:0]rif.data_in;
-// input [7:0]rif.address;
-// input rif.RW, rif.EN, cif.rst_n, cif.clk;
+output reg [3:0]data_out;
+input [3:0]data_in;
+input [7:0]address;
+input RW, EN, rst_n, clk;
 
 reg [3:0]register[127:0];
 
-always @(posedge cif.clk)
+always @(posedge clk)
 begin
-	if(cif.rst_n) begin
-		if(rif.EN) begin
-			if(rif.RW) begin
-				register[rif.address] <= rif.data_in;
+	if(rst_n) begin
+		if(EN) begin
+			if(RW) begin
+				register[address] <= data_in;
 			end
 			else begin
-				rif.data_out <= register[rif.address];
+				data_out <= register[address];
 			end
 		end
 		else begin
-			rif.data_out <= rif.data_out;
+			data_out <= data_out;
 		end
 	end
 	else begin :RAM_reset

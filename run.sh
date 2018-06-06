@@ -42,8 +42,6 @@ fi
 
 if [ ${design} = "ram" ] 
 then
-	top='ram_t.sv'
-	interface='ram_if.sv ctrl_if.sv'
 	testbench='ram_tb.sv'
 	device='ram.v'
 	# files='ram_t.sv ram_if.sv ctrl_if.sv ram_tb.sv ram.v'
@@ -63,7 +61,7 @@ else
 	exit
 fi
 
-files="$top $interface $testbench $device"
+files="$top $testbench $device"
 vcs $files +v2k -sverilog -full64 -debug_all -o aaa > compile.log
 cat compile.log | grep Warning
 cat compile.log | grep Error
