@@ -79,4 +79,8 @@ always #1 instruction_bus[11:8] = random_out_2;
 always #1 enable_n_1 = carry;
 always #1 enable_n_2 = carry_1;
 
+
+always @(posedge clk) begin
+	$display(random_out);
+end
 endmodule

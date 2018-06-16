@@ -6,6 +6,7 @@ device=
 top=
 tesbench=
 interface=
+mode=gui
 
 while [ $# != 0 ]
 do
@@ -18,6 +19,10 @@ do
 	-t | --test_initial)
 		shift
 		vcs_do=${1}
+		;;
+	-m | --mode)
+		shift
+		mode=${1}
 		;;
 	-v | --version)
 		echo sorry the version is yourself
@@ -82,8 +87,13 @@ fi
 
 if [[ $x  =  'y' || $x  =  'yes' ]] 
 then
-	./aaa -gui ${vcs_do} &
+	if [[ ${mode} = 'cli' ]]
+	then
+		mode=
+	fi
+	./aaa -${mode} ${vcs_do} &
 elif [[ $x  =  'n' || $x  =  'no' ]] 
 then
 	echo thanks using
 fi
+#to be continu
