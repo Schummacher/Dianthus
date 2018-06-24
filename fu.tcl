@@ -3,9 +3,11 @@ set link_library {* typical.db}
 set symbol_library {smic18.sdb}
 
 
-read_verilog cpu.v
-read_verilog ram.v
-read_verilog top.v
+# read_verilog cpu.v
+# read_verilog ram.v
+# read_verilog top.v
+
+read_verilog mean.v
 
 link
 
