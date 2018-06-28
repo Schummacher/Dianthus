@@ -53,6 +53,8 @@ lfsr U4(
 	rst_n,
 	clk);
 
+integer file_cut;
+
 
 //un_cycle sigal input
 initial begin
@@ -83,4 +85,11 @@ always #1 enable_n_2 = carry_1;
 always @(posedge clk) begin
 	$display(random_out);
 end
+
+initial file_cut = $fopen("./qqqwwwqqq.txt", "w");
+
+always @(posedge clk) begin
+	$fwrite(file_cut, "clk = %d", clk);
+end
+
 endmodule
