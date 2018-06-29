@@ -1,7 +1,10 @@
+set device mean
+set testbench ${device}_tb
+
 vlib work
 vmap work work
-vlog cpu.v cpu_tb.sv lfsr.v
-vsim work.cpu_tb
+vlog ${device}.v ${testbench}.sv
+vsim work.${testbench}
 radix -hex
-add wave cpu_tb/*
+add wave ./*
 run -all
