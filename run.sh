@@ -52,21 +52,29 @@ then
 	# files='ram_t.sv ram_if.sv ctrl_if.sv ram_tb.sv ram.v'
 elif [ ${design} = "cpu" ] 
 then
-	top='cpu_tb.sv'
+	testbench='cpu_tb.sv'
 	device='cpu.v lfsr.v'
 	# files='cpu_tb.sv cpu.v lfsr.v'
 elif [ ${design} = "top" ] 
 then
-	files='top_tb.sv top.v cpu.v ram.v'
+	device='top_tb.sv top.v cpu.v ram.v'
 elif [ ${design} = "lfsr" ] 
 then
-	files='lfsr_tb.sv lfsr.v'
+	device='lfsr_tb.sv lfsr.v'
+elif [ ${design} = "mean" ] 
+then
+	testbench='mean_tb.sv'
+	device='mean.v'
+elif [ ${design} = "mean_p" ] 
+then
+	testbench='mean_param_tb.sv'
+	device='mean_param.v'
 else
 	echo you input an error design name ${design}
 	exit
 fi
 
-files="$top $testbench $device"
+files="$testbench $device"
 vcs $files +v2k -sverilog -full64 -debug_all -o aaa > compile.log
 cat compile.log | grep Warning
 cat compile.log | grep Error

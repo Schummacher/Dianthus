@@ -7,7 +7,7 @@ set symbol_library {smic18.sdb}
 # read_verilog ram.v
 # read_verilog top.v
 
-read_verilog mean.v
+read_verilog mean_param.v
 
 link
 
