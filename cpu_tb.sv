@@ -26,7 +26,7 @@ cpu U1(
 wire carry, carry_1, carry_2;
 wire [3:0]random_out, random_out_1, random_out_2;
 reg [3:0]reset_in;
-reg rst_n, clk, enable_n, enable_n_1, enable_n_2;
+reg enable_n, enable_n_1, enable_n_2;
 
 //random test vector generation
 lfsr U2(
