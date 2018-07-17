@@ -69,6 +69,10 @@ elif [ ${design} = "mean_p" ]
 then
 	testbench='mean_param_tb.sv'
 	device='mean_param.v'
+elif [ ${design} = "f_div" ] 
+then
+	testbench='f_div_tb.sv'
+	device='f_div.v'
 else
 	echo you input an error design name ${design}
 	exit

@@ -4,7 +4,7 @@ reg [7:0] in;
 reg rst_n, clk;
 wire [7:0] out;
 
-mean #(16, 8, 4)U1(out, in, rst_n, clk);
+mean #(8, 8, 3)U1(out, in, rst_n, clk);
 
 initial begin
     clk = 1;

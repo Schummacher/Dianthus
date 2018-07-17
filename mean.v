@@ -1,7 +1,7 @@
 module mean#(
-  parameter buf_size = 16,
-  parameter bit_wide = 8,
-  parameter cont_bit = 4
+  parameter buf_size = 16,	//The deepth of buf for culculating mean value
+  parameter bit_wide = 8,	//Quantum of per bit
+  parameter cont_bit = 4	//How many bits of SUM needed 
 )
 (
   out,
